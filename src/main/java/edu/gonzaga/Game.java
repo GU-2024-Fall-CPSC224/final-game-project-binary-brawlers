@@ -72,10 +72,10 @@ public class Game extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    public void setUpStart(int selectedSpeed) {
-        playGame = true;
-        startGame();
-    }
+    // public void setUpStart(int selectedSpeed) {
+    //     playGame = true;
+    //     startGame();
+    // }
 
     // tick -> startGame
     // private void startGame() {
@@ -144,8 +144,8 @@ public class Game extends JPanel implements ActionListener {
     //     }
     // }
 
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        tick();
-    }
+    // @Override
+    // public void actionPerformed(ActionEvent event) {
+    //     tick();
+    // }
 }
