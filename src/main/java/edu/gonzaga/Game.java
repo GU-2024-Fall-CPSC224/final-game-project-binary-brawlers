@@ -23,11 +23,11 @@ public class Game extends JPanel implements ActionListener {
     private static final int game_width = 1000;
     private static final int game_height = 1000;
 
-    private Board board = new Board();
-    private Snake snake = new Snake();
+    // private Board board = new Board();
+    // private Snake snake = new Snake();
 
-    private boolean playGame = false;
-    private boolean snakeDeath = false;
+    // private boolean playGame = false;
+    // private boolean snakeDeath = false;
 
     // panel
     Game() {
@@ -78,34 +78,34 @@ public class Game extends JPanel implements ActionListener {
     }
 
     // tick -> startGame
-    private void startGame() {
-        if (!playGame || snakeDeath) return;
+    // private void startGame() {
+    //     if (!playGame || snakeDeath) return;
 
-        // board.displayBoard();
-        snake.move();
-        switch (board.detectCollision()) {
-            case "food":
-                //score++
-                snake.grow();
-                food.applyAffect(snake);
-                food = new Food(0, 0); //todo: randomize pos and type
-                break;
-            case "edge":
-                snakeDeath = true;
-                break;
-            case "obstacle":
-                snakeDeath = true;
-                break;
-        }
+    //     board.displayBoard();
+    //     snake.move();
+    //     switch (board.detectCollision()) {
+    //         case "food":
+    //             // score++;
+    //             snake.grow();
+    //             food.applyAffect(snake);
+    //             food = new Food(0, 0); //todo: randomize pos and type
+    //             break;
+    //         case "edge":
+    //             snakeDeath = true;
+    //             break;
+    //         case "obstacle":
+    //             snakeDeath = true;
+    //             break;
+    //     }
         
-        checkGameOver();
-    }
+    //     checkGameOver();
+    // }
 
-    private void checkGameOver() {    
-        if (snakeDeath) {
-            gameOver();
-        }
-    }
+    // private void checkGameOver() {    
+    //     if (snakeDeath) {
+    //         gameOver();
+    //     }
+    // }
 
     // private void gameOver() {
     //     String[] options = {"Try Again", "Menu", "Exit"};
