@@ -16,7 +16,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.java.edu.gonzaga.Score;
+import main.java.edu.gonzaga;
 
 public class Game extends JPanel implements ActionListener {
     // dimensions
@@ -25,9 +25,7 @@ public class Game extends JPanel implements ActionListener {
 
     private Board board = new Board();
     private Snake snake = new Snake();
-    // private Score score = new Score();
 
-    /* timer? */
     private boolean playGame = false;
     private boolean snakeDeath = false;
 
@@ -83,7 +81,7 @@ public class Game extends JPanel implements ActionListener {
     private void startGame() {
         if (!playGame || snakeDeath) return;
 
-        board.displayBoard();
+        // board.displayBoard();
         snake.move();
         switch (board.detectCollision()) {
             case "food":
@@ -103,34 +101,30 @@ public class Game extends JPanel implements ActionListener {
         checkGameOver();
     }
 
-    private void pauseGame() {
-
-    }
-
     private void checkGameOver() {    
         if (snakeDeath) {
             gameOver();
         }
     }
 
-    private void gameOver() {
-        String[] options = {"Try Again", "Menu", "Exit"};
-        var choice = JOptionPane.showOptionDialog(this, "GAME OVER", "Snake Game", 0, 3, null, options, options[0]);
+    // private void gameOver() {
+    //     String[] options = {"Try Again", "Menu", "Exit"};
+    //     var choice = JOptionPane.showOptionDialog(this, "GAME OVER", "Snake Game", 0, 3, null, options, options[0]);
 
-        // WILL IMPLEMENT ONCE BOARDS HAVE BEEN CREATED
-        // try again
-        // if (choice == 0) {
-        //     resetGame();
-        // }
-        // // go to menu
-        // if (choice == 1) {
-        //     exitGame();
-        // }
-        // // close window
-        // if (choice == 2) {
-        //     System.exit(0);
-        // }
-    }
+    //     // WILL IMPLEMENT ONCE BOARDS HAVE BEEN CREATED
+    //     // try again
+    //     if (choice == 0) {
+    //         resetGame();
+    //     }
+    //     // go to menu
+    //     if (choice == 1) {
+    //         exitGame();
+    //     }
+    //     // close window
+    //     if (choice == 2) {
+    //         System.exit(0);
+    //     }
+    // }
 
     // private void resetGame() {
     //     playGame = false;

@@ -23,6 +23,4 @@ public class Board {
         }
         return "";
     }
-
-    // different levels for boards
 }

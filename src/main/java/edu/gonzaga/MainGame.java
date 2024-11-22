@@ -5,7 +5,7 @@
  * Project Description:
  * 
  * 
- * Contributors:
+ * Contributors: Navin Kunakornvanich, Francesca Strickland-Anderson, Cooper Braun, Bradley Russell
  * 
  * 
  * Copyright: 2024
