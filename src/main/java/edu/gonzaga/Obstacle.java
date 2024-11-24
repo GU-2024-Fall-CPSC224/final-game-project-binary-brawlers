@@ -1,19 +1,8 @@
 package edu.gonzaga;
 
-public class Obstacle {
-    private int x;
-    private int y;
+public class Obstacle extends BoardElement {
 
     public Obstacle(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+        super(x, y);
     }
 }

@@ -12,18 +12,41 @@
  */
 package edu.gonzaga;
 
+import java.util.Scanner;
+
 import javax.swing.JFrame;
 
 /** Main program class for launching your team's program. */
 public class MainGame {
-    public static void main(String[] args) {
-        // intro window
-        JFrame frame = new JFrame("Snake Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+    public static void main(String[] args) throws InterruptedException{
+        // // intro window (add this stuff to display probably?)
+        // JFrame frame = new JFrame("Snake Game");
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setResizable(false);
 
-        Game game = new Game();
-        frame.add(game);
-        game.startMenu(frame);
+        // Display display = new Display();
+        // frame.add(display);
+        // display.startMenu(frame);
+
+
+        //wasd to turn
+        //enter to tick game
+        Board board = new Board(2);
+        Scanner sc = new Scanner(System.in);
+        while (board.tick()) {
+            String dir = sc.nextLine();
+            if (dir == "") {
+                continue;
+            }
+            if (dir.equals("w")) {
+                board.turnSnake('u');
+            } else if (dir.equals("a")) {
+                board.turnSnake('l');
+            } else if (dir.equals("s")) {
+                board.turnSnake('d');
+            } else if (dir.equals("d")) {
+                board.turnSnake('r');
+            }
+        }
     }
 }

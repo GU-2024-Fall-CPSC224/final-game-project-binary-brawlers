@@ -2,40 +2,36 @@ package edu.gonzaga;
 
 import java.util.ArrayList;
 
-public class Snake {
-    private int length;
-    private int headX;
-    private int headY;
+public class Snake extends BoardElement {
+    private int length = 4;
     private ArrayList<SnakeSegment> segments;
-    private char facing; // u, d, l, r
-    private int nextRotation;
+    private char facing = 'r'; // u, d, l, r
+    private int nextRotation = 'l' + 'r';
+    private int invincibleTimer = 0;
 
     public Snake() {
-        length = 4;
-        headX = 0;
-        headY = 0;
-        facing = 'r';
-        nextRotation = 'l'+'r';
+        super(3, 7);
         segments = new ArrayList<>();
-        segments.add(new SnakeSegment(-3, 0, 1,'l'+'r'));
-        segments.add(new SnakeSegment(-2, 0, 2, 'l'+'r'));
-        segments.add(new SnakeSegment(-1, 0, 3, 'l'+'r'));
+        segments.add(new SnakeSegment(0, 7, 1, 'l' + 'r'));
+        segments.add(new SnakeSegment(1, 7, 2, 'l' + 'r'));
+        segments.add(new SnakeSegment(2, 7, 3, 'l' + 'r'));
     }
 
+    //moves snake forward
     public void move() {
-        segments.add(new SnakeSegment(headX, headY, length, nextRotation));
+        segments.add(new SnakeSegment(x, y, length, nextRotation));
         switch (facing) {
             case 'u':
-                headY--;
+                y--;
                 break;
             case 'd':
-                headY++;
+                y++;
                 break;
             case 'l':
-                headX--;
+                x--;
                 break;
             case 'r':
-                headX++;
+                x++;
                 break;
         }
         for (SnakeSegment s : segments) {
@@ -44,7 +40,10 @@ public class Snake {
         if (segments.get(0).getLife() == 0) {
             segments.remove(0);
         }
-        nextRotation = facing == 'u' || facing == 'd' ? 'u'+'d' : 'l'+'r';
+        if (invincibleTimer > 0) {
+            invincibleTimer--;
+        }
+        nextRotation = facing == 'u' || facing == 'd' ? 'u' + 'd' : 'l' + 'r';
     }
 
     public void grow() {
@@ -54,17 +53,9 @@ public class Snake {
         length++;
     }
 
-    public String toString() {
-        String out = "h(" + headX + "," + headY + " " + (char)facing + " " + length + ")\n";
-        for (SnakeSegment s : segments) {
-            out += s + "\n";
-        }
-        return out;
-    }
-
     public void turn(char dir) {
         if (canTurn(dir)) {
-            //opposite of prev dir, add new dir, set as next rotation
+            // opposite of prev dir, add new dir, set as next rotation
             nextRotation = (facing ^ (facing % 6 == 0 ? 30 : 17)) + dir;
             facing = dir;
         }
@@ -77,15 +68,7 @@ public class Snake {
         if (facing + dir == 'u' + 'd' || facing + dir == 'l' + 'r') {
             return false;
         }
-        return true; 
-    }
-
-    public int getX() {
-        return headX;
-    }
-
-    public int getY() {
-        return headY;
+        return true;
     }
 
     public char getFacing() {
@@ -98,5 +81,21 @@ public class Snake {
 
     public int getLength() {
         return length;
+    }
+
+    public void setInvincible(int time) {
+        invincibleTimer = time;
+    }
+
+    public int getInvincible() {
+        return invincibleTimer;
+    }
+
+    public String toString() {
+        String out = "h(" + x + "," + y + " " + (char) facing + " " + length + ")\n";
+        for (SnakeSegment s : segments) {
+            out += s + "\n";
+        }
+        return out;
     }
 }
