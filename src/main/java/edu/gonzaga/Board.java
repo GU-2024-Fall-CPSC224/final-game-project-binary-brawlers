@@ -72,11 +72,22 @@ public class Board {
         return "";
     }
 
+    // randomizes the food type
     private void makeNewFood() {
         do {
-            //todo: randomize type
-            food = new Food((int)(Math.random() * 17), (int)(Math.random() * 17));
-        } while (detectCollision(food) == "obstacle" || detectCollision(food) == "snake");
+            int foodType = (int) (Math.random() * 3);
+            switch (foodType) {
+                case 0:
+                food = new Apple((int) (Math.random() * width), (int) (Math.random() * height));
+                break;
+                case 1:
+                food = new GoldenApple((int) (Math.random() * width), (int) (Math.random() * height));
+                break;
+                case 2:
+                food = new StarFruit((int) (Math.random() * width), (int) (Math.random() * height));
+                break;
+            }
+        } while (detectCollision(food).equals("obstacle") || detectCollision(food).equals("snake"));
     }
     
     private void keepInBounds() {
