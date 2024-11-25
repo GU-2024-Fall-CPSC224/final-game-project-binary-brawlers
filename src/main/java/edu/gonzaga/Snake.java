@@ -16,7 +16,6 @@ public class Snake extends BoardElement {
         segments.add(new SnakeSegment(0, 7, 1, 'l' + 'r'));
         segments.add(new SnakeSegment(1, 7, 2, 'l' + 'r'));
         segments.add(new SnakeSegment(2, 7, 3, 'l' + 'r'));
-        segments.add(new SnakeSegment(3, 7, 4, 'l' + 'r'));
     }
 
     //moves snake forward
