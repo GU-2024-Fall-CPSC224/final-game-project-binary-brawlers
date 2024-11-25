@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Board {
     private int width = 17;
-    private int height = 17;
+    private int height = 15;
     private Snake snake;
     private ArrayList<Obstacle> obstacles;
     private Food food;
@@ -110,23 +110,23 @@ public class Board {
     //print board to console for testing
     public String toString() {
         StringBuilder gameStr = new StringBuilder();
-        for (int i = 0; i < 17; i++) {
-            for (int j = 0; j < 17; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 gameStr.append("`");
             }
             gameStr.append("\n");
         }
-        gameStr.setCharAt(food.getY() * 18 + food.getX(), 'F');
+        gameStr.setCharAt(food.getY() * (width + 1) + food.getX(), 'F');
         for (Obstacle o : obstacles) {
-            int index = o.getY() * 18 + o.getX();
+            int index = o.getY() * (width + 1) + o.getX();
             gameStr.setCharAt(index, 'O');
         }
         for (SnakeSegment s : snake.getSegments()) {
-            int index = s.getY() * 18 + s.getX();
+            int index = s.getY() * (width + 1) + s.getX();
             gameStr.setCharAt(index, s.getRotAsChr());
         }
         char headChr = Map.of('u','^','d','v','l','<','r','>').get(snake.getFacing());
-        gameStr.setCharAt(snake.getY() * 18 + snake.getX(), headChr);
+        gameStr.setCharAt(snake.getY() * (width + 1) + snake.getX(), headChr);
         gameStr.append("Score: " + score + "\n");
         return gameStr.toString();
     }

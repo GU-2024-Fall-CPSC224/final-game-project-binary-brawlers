@@ -34,6 +34,7 @@ public class Display extends JPanel implements ActionListener {
             setBackground(Color.green);
         }
 
+        
         public void startMenu(JFrame frame) {
             JPanel startWindow = new JPanel();
             startWindow.setBackground(Color.black);
