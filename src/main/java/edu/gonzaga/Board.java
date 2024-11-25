@@ -14,7 +14,19 @@ public class Board {
     //easy = 0, medium = 2, hard = 5
     public Board(int numObstacles) {
         snake = new Snake();
-        food = new Food(12, 7);
+        // randomize the initial food type
+        int foodType = (int) (Math.random() * 3);
+        switch (foodType) {
+            case 0:
+            food = new Apple(12, 7);
+            break;
+            case 1:
+            food = new GoldenApple(12, 7);
+            break;
+            case 2:
+            food = new StarFruit(12, 7);
+            break;
+        }
         obstacles = new ArrayList<>();
         for (int i = 0; i < numObstacles; i++) {
             obstacles.add(new Obstacle((int)(Math.random() * width), (int)(Math.random() * height)));
