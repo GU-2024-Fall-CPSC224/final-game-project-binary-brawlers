@@ -28,4 +28,8 @@ public class SnakeImage {
     private Image loadImage(String path) {
         return new ImageIcon(getClass().getResource(path)).getImage(); 
     }
+
+    public Image getTexture(String key) {
+        return textures.get(key);
+    }
 }

@@ -9,6 +9,7 @@ public class SnakeSegment extends BoardElement {
     private int y;
     private int life; 
     private int rotation; //u+d, l+r, u+l, u+r, d+l, d+r
+    public boolean isHead;
 
     public SnakeSegment(int x,int y, int life, int rotation) {
         super(x, y);
@@ -23,6 +24,10 @@ public class SnakeSegment extends BoardElement {
 
     public int getLife() {
         return life;
+    }
+
+    public boolean isHead(){
+        return isHead;
     }
 
     public String toString() {
