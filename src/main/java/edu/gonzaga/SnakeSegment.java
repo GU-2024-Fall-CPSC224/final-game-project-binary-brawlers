@@ -15,7 +15,6 @@ public class SnakeSegment extends BoardElement {
         this.life = life;
         this.rotation = rotation;
         this.texturePath = "/snake/" + getRotAsStr() + ".png";
-        //this.image = new ImageIcon(getClass().getResource(texturePath)).getImage();
     }
 
     public void subtractLife(int num) {

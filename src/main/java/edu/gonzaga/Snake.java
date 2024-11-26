@@ -1,6 +1,5 @@
 package edu.gonzaga;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Snake extends BoardElement {
