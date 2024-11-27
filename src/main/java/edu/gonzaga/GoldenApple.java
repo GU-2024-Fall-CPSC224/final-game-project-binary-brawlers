@@ -1,18 +1,11 @@
 package edu.gonzaga;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class GoldenApple extends Food {
-    private ImageIcon goldenAppleIcon;
-
     public GoldenApple(int x, int y) {
         super(x,y);
-        loadGoldenAppleIcon(); 
-    }
-
-    private void loadGoldenAppleIcon() {
-        goldenAppleIcon = new ImageIcon(getClass().getResource("/food/golden.png"));
     }
 
     @Override
@@ -23,13 +16,8 @@ public class GoldenApple extends Food {
         }
     }
 
-    public ImageIcon getIcon() {
-        return goldenAppleIcon;
-    }
-
-    public void draw(Graphics g, int tileSize) {
-        if (goldenAppleIcon != null) {
-            g.drawImage(goldenAppleIcon.getImage(), getX() * tileSize, getY() * tileSize, null);
-        }
+    @Override
+    public Image getImage() {
+        return new ImageIcon(getClass().getResource("/resources/food/golden.png")).getImage();
     }
 }

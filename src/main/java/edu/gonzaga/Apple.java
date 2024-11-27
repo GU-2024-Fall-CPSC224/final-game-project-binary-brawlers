@@ -1,18 +1,11 @@
 package edu.gonzaga;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class Apple extends Food {
-    private ImageIcon appleIcon;
-
     public Apple (int x, int y) {
         super (x,y);
-        loadAppleIcon(); 
-    }
-
-    private void loadAppleIcon() {
-        appleIcon = new ImageIcon(getClass().getResource("/food/apple.png"));
     }
 
     @Override
@@ -20,13 +13,8 @@ public class Apple extends Food {
         // regular apple does not apply any special effects
     }
 
-    public ImageIcon getIcon() {
-        return appleIcon;
-    }
-
-    public void draw(Graphics g, int tileSize) {
-        if (appleIcon != null) {
-            g.drawImage(appleIcon.getImage(), getX() * tileSize, getY() * tileSize, null);
-        }
+    @Override
+    public Image getImage() {
+        return new ImageIcon(getClass().getResource("/resources/food/apple.png")).getImage();
     }
 }

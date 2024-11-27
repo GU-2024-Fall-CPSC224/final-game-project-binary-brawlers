@@ -1,18 +1,11 @@
 package edu.gonzaga;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class StarFruit extends Food {
-    private ImageIcon starFruitIcon;
-
     public StarFruit(int x, int y) {
         super(x,y);
-        loadStarFruitIcon();
-    }
-
-    private void loadStarFruitIcon() {
-        starFruitIcon = new ImageIcon(getClass().getResource("/food/star.png"));
     }
 
     @Override
@@ -21,13 +14,8 @@ public class StarFruit extends Food {
         snake.setInvincible(10);
     }
 
-    public ImageIcon getIcon() {
-        return starFruitIcon;
-    }
-
-    public void draw(Graphics g, int tileSize) {
-        if (starFruitIcon != null) {
-            g.drawImage(starFruitIcon.getImage(), getX() * tileSize, getY() * tileSize, null);
-        }
+    @Override
+    public Image getImage() {
+        return new ImageIcon(getClass().getResource("/resources/food/star.png")).getImage();
     }
 }
