@@ -62,6 +62,10 @@ public class Board {
         snake.turn(dir);
     }
 
+    public int getScore() {
+        return score;
+    } 
+
     //takes in a board element and returns if it collides with anything, if not returns empty string
     //used for snake dying and setting new food pos
     public String detectCollision(BoardElement object) {

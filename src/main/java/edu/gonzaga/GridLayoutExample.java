@@ -7,45 +7,67 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//This should also have a keyboard listener that calls snake.turn
-//and a timer that calls 
 public class GridLayoutExample extends JFrame {
-    public GridLayoutExample() throws IOException {
+    private Board board;
+    private JLabel scoreLabel;
+    private JLabel timerLabel;
+    private int timeElapsed;
+
+    public GridLayoutExample(Board board) throws IOException {
+        this.board = board;
+        this.timeElapsed = 0;
         // Set up the JFrame
-        super("Brawl Snake");
+        setTitle("Brawl Snake");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(17*50, 15*50+50);
+        setSize(17 * 50, 15 * 50 + 50);
         setResizable(false);
 
-        JPanel scorePanel = new JPanel();
-        scorePanel.setLayout(new BorderLayout());
-        JLabel scoreLabel = new JLabel("Score: 0");
+        JPanel borderPanel = new JPanel();
+        borderPanel.setLayout(new BorderLayout());
+
+        scoreLabel = new JLabel("Score: " + board.getScore());
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        scorePanel.add(scoreLabel, BorderLayout.NORTH);
-        add(scoreLabel, BorderLayout.NORTH);
+        borderPanel.add(scoreLabel, BorderLayout.WEST);
+
+        timerLabel = new JLabel("Time: " + timeElapsed, JLabel.RIGHT);
+        timerLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        borderPanel.add(timerLabel, BorderLayout.EAST);
+        
+        add(borderPanel, BorderLayout.NORTH);
 
         // Create a JPanel with GridLayout
         JPanel panel = new JPanel(new GridLayout(15, 17));
-        panel.setBackground(Color.decode("#578A34"));
 
         // Create text labels for the rest of the grid
         ArrayList<JLabel> tiles = new ArrayList<>();
-        for (int i = 0; i < 15*17; i++) {
+        for (int i = 0; i < 15 * 17; i++) {
             JLabel label = new JLabel();
-            label.setSize(50, 50);
             label.setOpaque(true);
+            label.setPreferredSize(new Dimension(50, 50));
             label.setBackground(Color.decode(i % 2 == 0 ? "#d4a276" : "#bc8a5f"));
             tiles.add(label);
             panel.add(label);
         }
-        //tiles.get(3+815).setIcon(new ImageIcon(ImageIO.read(new File("./hr.png"))));
+
         add(panel, BorderLayout.CENTER);
 
         // Make the JFrame visible
         setVisible(true);
+
+        // Set up timer
+        new Timer(1000, e -> updateGame()).start();
+    }
+
+    private void updateGame() {
+        // Update the game state (e.g., move the snake, check collisions)
+        // Update the score
+        scoreLabel.setText("Score: " + board.getScore());
+        timeElapsed++;
+        timerLabel.setText("Time: " + timeElapsed);
     }
 
     public static void main(String[] args) throws IOException {
-        new GridLayoutExample();
+        Board board = new Board(5);
+        new GridLayoutExample(board);
     }
-} 
+}
