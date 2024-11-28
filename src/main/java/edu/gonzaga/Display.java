@@ -8,8 +8,8 @@ import java.util.Scanner;
 import javax.swing.*;
 
 public class Display extends JPanel implements ActionListener {
-    private static final int GAME_WIDTH = 800;
-    private static final int GAME_HEIGHT = 800;
+    private int GAME_WIDTH = 1000;
+    private int GAME_HEIGHT = 1000;
 
     // defaults and intialize
     private int gameSpeed = 100;
@@ -28,6 +28,9 @@ public class Display extends JPanel implements ActionListener {
     }
 
     public void startMenu(JFrame frame) {
+        frame.setSize(1000, 1000);
+        frame.setResizable(false);
+
         JPanel startWindow = new JPanel();
         startWindow.setLayout(new BoxLayout(startWindow, BoxLayout.Y_AXIS));
         startWindow.setBackground(Color.black);
@@ -63,6 +66,7 @@ public class Display extends JPanel implements ActionListener {
 
         frame.add(startWindow);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -157,27 +161,63 @@ public class Display extends JPanel implements ActionListener {
                 board.turnSnake('r');
             }
         }
+        gameOverMenu();
     }
 
-    public void gameOverMenu(JFrame frame) {
-        String[] options = {"Try Again", "Menu", "Exit"};
-        int choice = JOptionPane.showOptionDialog(this, "GAME OVER", "Snake Game",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+    public void gameOverMenu() {
+        JFrame frame = new JFrame("Game Over");
+        frame.setSize(GAME_WIDTH, GAME_HEIGHT);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+        JPanel gameOverPanel = new JPanel();
+        gameOverPanel.setLayout(new BoxLayout(gameOverPanel, BoxLayout.Y_AXIS));
+        gameOverPanel.setBackground(Color.black);
+    
+        // title
+        JLabel gameOverLabel = new JLabel("GAME OVER");
+        gameOverLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gameOverLabel.setForeground(Color.red);
+        gameOverLabel.setFont(new Font("Arial", Font.BOLD, 48));
+        gameOverPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        gameOverPanel.add(gameOverLabel);
+    
+        // try again button
+        JButton tryAgainButton = new JButton("Try Again");
+        tryAgainButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // restarts 
+        tryAgainButton.addActionListener(event -> {
+            frame.dispose(); 
+            startGame(); 
+        });
+    
+        // returns to main menu
+        JButton menuButton = new JButton("Main Menu");
+        menuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuButton.addActionListener(event -> {
+            frame.dispose();
+            JFrame mainMenuFrame = new JFrame("Snake Game");
+            mainMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            startMenu(mainMenuFrame);
+        });
+    
+        // exits
+        JButton exitButton = new JButton("Exit Game");
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitButton.addActionListener(event -> System.exit(0));
 
-         // try again
-         if (choice == 0) {
-            // resetGame();
-        }
-        // go to menu
-        if (choice == 1) {
-            // exitGame();
-        }
-        // close window
-        if (choice == 2) {
-            System.exit(0);
-        }
+        gameOverPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        gameOverPanel.add(tryAgainButton);
+        gameOverPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        gameOverPanel.add(menuButton);
+        gameOverPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        gameOverPanel.add(exitButton);
+
+        frame.add(gameOverPanel);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
-
+    
     // private void restartMenu(JFrame frame) {
     //     frame.getContentPane().removeAll();
     //     startMenu(frame);

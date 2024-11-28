@@ -19,13 +19,12 @@ import javax.swing.JFrame;
 /** Main program class for launching your team's program. */
 public class MainGame {
     public static void main(String[] args) throws InterruptedException{
-        // // intro window (add this stuff to display probably?)
+        // intro window (add this stuff to display probably?)
         JFrame frame = new JFrame("Snake Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
         Display display = new Display();
-        frame.add(display);
         display.startMenu(frame);
 
 
