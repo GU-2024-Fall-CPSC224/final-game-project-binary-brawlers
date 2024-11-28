@@ -170,7 +170,7 @@ public class Display extends JPanel implements ActionListener {
         }
         // go to menu
         if (choice == 1) {
-            exitGame();
+            // exitGame();
         }
         // close window
         if (choice == 2) {
