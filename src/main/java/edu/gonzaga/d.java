@@ -16,7 +16,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Display extends JPanel implements ActionListener {
+public class d extends JPanel implements ActionListener {
 
     private static final int game_width = 1000;
     private static final int game_height = 1000;
@@ -29,7 +29,7 @@ public class Display extends JPanel implements ActionListener {
     }
 
     // panel
-    public Display() {
+    public d() {
             setPreferredSize(new Dimension(game_width, game_height));
             setBackground(Color.green);
         }

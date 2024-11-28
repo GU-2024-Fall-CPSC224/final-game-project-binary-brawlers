@@ -7,13 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GridLayoutExample extends JFrame {
+public class BoardLayout extends JFrame {
     private Board board;
     private JLabel scoreLabel;
     private JLabel timerLabel;
+    private ArrayList<JLabel> tiles;
     private int timeElapsed;
 
-    public GridLayoutExample(Board board) throws IOException {
+    public BoardLayout(Board board) throws IOException {
         this.board = board;
         this.timeElapsed = 0;
         // Set up the JFrame
@@ -39,7 +40,7 @@ public class GridLayoutExample extends JFrame {
         JPanel panel = new JPanel(new GridLayout(15, 17));
 
         // Create text labels for the rest of the grid
-        ArrayList<JLabel> tiles = new ArrayList<>();
+        tiles = new ArrayList<>();
         for (int i = 0; i < 15 * 17; i++) {
             JLabel label = new JLabel();
             label.setOpaque(true);
@@ -59,15 +60,15 @@ public class GridLayoutExample extends JFrame {
     }
 
     private void updateGame() {
-        // Update the game state (e.g., move the snake, check collisions)
-        // Update the score
+        // Update score and timer
         scoreLabel.setText("Score: " + board.getScore());
         timeElapsed++;
         timerLabel.setText("Time: " + timeElapsed);
     }
+    
 
     public static void main(String[] args) throws IOException {
         Board board = new Board(5);
-        new GridLayoutExample(board);
+        new BoardLayout(board);
     }
 }

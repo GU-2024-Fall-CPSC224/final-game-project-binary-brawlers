@@ -5,8 +5,8 @@ import java.awt.*;
 import java.util.Map;
 
 public class SnakeSegment extends BoardElement {
-    private int x;
-    private int y;
+    //private int x;
+    //private int y;
     private int life; 
     private int rotation; //u+d, l+r, u+l, u+r, d+l, d+r
     public boolean isHead;
@@ -15,7 +15,6 @@ public class SnakeSegment extends BoardElement {
         super(x, y);
         this.life = life;
         this.rotation = rotation;
-        this.texturePath = "/snake/" + getRotAsStr() + ".png";
     }
 
     public void subtractLife(int num) {
@@ -30,12 +29,16 @@ public class SnakeSegment extends BoardElement {
         return isHead;
     }
 
-    public String toString() {
-        return "(" + x + "," + y + " " + getRotAsStr() + " " + life + ")";
+    public void setHead(boolean head) {
+        isHead = head;
     }
 
     public int getRotation() {
         return rotation;
+    }
+
+    public String getTextureString() {
+        return "/snake/" + getRotAsStr() + ".png";
     }
 
     //for texture
@@ -46,5 +49,10 @@ public class SnakeSegment extends BoardElement {
     //for console display
     public char getRotAsChr() {
         return Map.of(217,'|',222,'-',225,'+',231,'+',208,'+',214,'+').get(rotation);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + getX() + "," + getY() + " " + getRotAsStr() + " " + life + ")";
     }
 }
