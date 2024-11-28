@@ -1,23 +1,15 @@
 package edu.gonzaga;
 
-public class Food {
-    private int x;
-    private int y;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
-    public Food(int x, int y) {
-        this.x = x;
-        this.y = y;
+public abstract class Food extends BoardElement {
+    public Food (int x, int y) {
+        super(x,y);
     }
+    // applies the effect of the food on the snake
+    public abstract void applyAffect(Snake snake);
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void applyAffect(Snake snake) {
-
-    }
+    public abstract Image getImage();
 }
+

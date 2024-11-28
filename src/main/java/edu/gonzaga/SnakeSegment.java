@@ -1,18 +1,21 @@
 package edu.gonzaga;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
 
-public class SnakeSegment {
+public class SnakeSegment extends BoardElement {
     private int x;
     private int y;
     private int life; 
     private int rotation; //u+d, l+r, u+l, u+r, d+l, d+r
+    public boolean isHead;
 
     public SnakeSegment(int x,int y, int life, int rotation) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.life = life;
         this.rotation = rotation;
+        this.texturePath = "/snake/" + getRotAsStr() + ".png";
     }
 
     public void subtractLife(int num) {
@@ -23,6 +26,10 @@ public class SnakeSegment {
         return life;
     }
 
+    public boolean isHead(){
+        return isHead;
+    }
+
     public String toString() {
         return "(" + x + "," + y + " " + getRotAsStr() + " " + life + ")";
     }
@@ -31,7 +38,13 @@ public class SnakeSegment {
         return rotation;
     }
 
+    //for texture
     public String getRotAsStr() {
         return Map.of(217,"ud",222,"lr",225,"ul",231,"ur",208,"dl",214,"dr").get(rotation);
+    }
+
+    //for console display
+    public char getRotAsChr() {
+        return Map.of(217,'|',222,'-',225,'+',231,'+',208,'+',214,'+').get(rotation);
     }
 }
