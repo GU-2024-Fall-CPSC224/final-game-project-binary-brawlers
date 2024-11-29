@@ -98,4 +98,8 @@ public class Snake extends BoardElement {
         }
         return out;
     }
+
+    public SnakeSegment getHead() {
+        return segments.get(segments.size() - 1);
+    }
 }

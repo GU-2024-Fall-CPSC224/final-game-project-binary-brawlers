@@ -5,20 +5,18 @@
  * Project Description:
  * 
  * 
- * Contributors:
+ * Contributors: Cooper Braun, Navin Kunakornvanich, Francesca Strickland-Anderson, Bradley Russell
  * 
  * 
  * Copyright: 2024
  */
 package edu.gonzaga;
 
-import java.util.Scanner;
-
-import javax.swing.JFrame;
+import javax.swing.Timer;
 
 /** Main program class for launching your team's program. */
 public class MainGame {
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) {
         // // intro window (add this stuff to display probably?)
         // JFrame frame = new JFrame("Snake Game");
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,21 +30,24 @@ public class MainGame {
         //wasd to turn
         //enter to tick game
         Board board = new Board(2);
-        Scanner sc = new Scanner(System.in);
-        while (board.tick()) {
-            String dir = sc.nextLine();
-            if (dir == "") {
-                continue;
+        
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            try {
+                // create graphical layout
+                BoardLayout layout = new BoardLayout(board);
+
+                //timer to control snake movement/game updates
+                new Timer (300, e -> {
+                    if (!board.tick()) {
+                        System.out.println("Game Over!");
+                        ((Timer) e.getSource()).stop();
+                    } else {
+                        layout.updateGame();
+                    }
+                }).start();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (dir.equals("w")) {
-                board.turnSnake('u');
-            } else if (dir.equals("a")) {
-                board.turnSnake('l');
-            } else if (dir.equals("s")) {
-                board.turnSnake('d');
-            } else if (dir.equals("d")) {
-                board.turnSnake('r');
-            }
-        }
+        });
     }
 }

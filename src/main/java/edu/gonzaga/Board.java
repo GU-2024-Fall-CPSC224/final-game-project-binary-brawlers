@@ -137,5 +137,13 @@ public class Board {
         gameStr.setCharAt(snake.getY() * (width + 1) + snake.getX(), headChr);
         gameStr.append("Score: " + score + "\n");
         return gameStr.toString();
-    }  
+    }
+    
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
+
+    public Food getFood() {
+        return food;
+    }
 }

@@ -1,4 +1,4 @@
-import java.awt.image.BufferedImage;
+/*import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
@@ -29,4 +29,4 @@ public class Stupid{
         mainWindowFrame.setSize(400, 400);
         mainWindowFrame.setLayout(null);
     }
-}
+}*/

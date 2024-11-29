@@ -59,7 +59,25 @@ public class BoardLayout extends JFrame {
         new Timer(1000, e -> updateGame()).start();
     }
 
-    private void updateGame() {
+    public void updateGame() {
+        // clear previous tile colors
+        for (JLabel tile : tiles) {
+            tile.setBackground(Color.decode("#d4a276"));
+        }
+
+        // draw the food
+        tiles.get(board.getFood().getY() * 17 + board.getFood().getX()).setBackground(Color.RED);
+
+        // draw the obstacles
+        for (Obstacle obstacle : board.getObstacles()) {
+            tiles.get(obstacle.getY() * 17 + obstacle.getX()).setBackground(Color.GRAY);
+        }
+
+        // draw the snake
+        for (SnakeSegment segment : board.getSnake().getSegments()) {
+            tiles.get(segment.getY() * 17 + segment.getX()).setBackground(Color.GREEN);
+        }
+
         // Update score and timer
         scoreLabel.setText("Score: " + board.getScore());
         timeElapsed++;
