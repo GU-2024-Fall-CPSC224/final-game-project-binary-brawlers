@@ -37,7 +37,8 @@ public class MainGame {
                 BoardLayout layout = new BoardLayout(board);
 
                 //timer to control snake movement/game updates
-                new Timer (300, e -> {
+                new Timer (200, e -> {
+                    board.turnSnake(board.getSnake().getFacing());
                     if (!board.tick()) {
                         System.out.println("Game Over!");
                         ((Timer) e.getSource()).stop();

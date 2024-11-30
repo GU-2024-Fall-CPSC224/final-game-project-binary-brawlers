@@ -3,6 +3,8 @@ package edu.gonzaga;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +17,34 @@ public class BoardLayout extends JFrame {
     private int timeElapsed;
 
     public BoardLayout(Board board) throws IOException {
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                char direction;
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_W:
+                    direction = 'u';
+                    break;
+                    case KeyEvent.VK_A:
+                    direction = 'l';
+                    break;
+                    case KeyEvent.VK_S:
+                    direction = 'd';
+                    break;
+                    case KeyEvent.VK_D:
+                    direction = 'r';
+                    break;
+                    default:
+                    direction = ' ';
+                }
+                if (direction != ' ') {
+                    board.turnSnake(direction);
+                }
+            }
+        });
+        setFocusable(true);
+        requestFocusInWindow();
+        
         this.board = board;
         this.timeElapsed = 0;
         // Set up the JFrame
