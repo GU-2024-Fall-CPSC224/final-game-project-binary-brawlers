@@ -91,8 +91,10 @@ public class BoardLayout extends JFrame {
 
     public void updateGame() {
         // clear previous tile colors
-        for (JLabel tile : tiles) {
-            tile.setBackground(Color.decode("#d4a276"));
+        setEnabled(false);
+
+        for (int i = 0; i < 15*17; i ++) {
+            tiles.get(i).setBackground(Color.decode(i % 2 == 0 ? "#d4a276" : "#bc8a5f"));
         }
 
         // draw the food
@@ -107,11 +109,14 @@ public class BoardLayout extends JFrame {
         for (SnakeSegment segment : board.getSnake().getSegments()) {
             tiles.get(segment.getY() * 17 + segment.getX()).setBackground(Color.GREEN);
         }
+        tiles.get(board.getSnake().getY() * 17 + board.getSnake().getX()).setBackground(Color.GREEN);
 
-        // Update score and timer
-        scoreLabel.setText("Score: " + board.getScore());
-        timeElapsed++;
-        timerLabel.setText("Time: " + timeElapsed);
+       // Update score and timer
+       scoreLabel.setText("Score: " + board.getScore());
+       timeElapsed++;
+       timerLabel.setText("Time: " + timeElapsed);
+
+       setEnabled(true);
     }
     
 
