@@ -13,20 +13,21 @@
 package edu.gonzaga;
 
 import javax.swing.Timer;
+import javax.swing.JFrame;
 
 /** Main program class for launching your team's program. */
 public class MainGame {
-    public static void main(String[] args) {
-        // // intro window (add this stuff to display probably?)
-        // JFrame frame = new JFrame("Snake Game");
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setResizable(false);
+    public static void main(String[] args) throws InterruptedException{
+        // intro window (add this stuff to display probably?)
+        JFrame frame = new JFrame("Snake Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
 
-        // Display display = new Display();
-        // frame.add(display);
-        // display.startMenu(frame);
+        Display display = new Display();
+        display.startMenu(frame);
 
 
+        // added this section to display
         //wasd to turn
         //enter to tick game
         Board board = new Board(2);
