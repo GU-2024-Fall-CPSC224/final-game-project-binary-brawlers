@@ -13,6 +13,7 @@ public class BoardLayout extends JFrame {
     private JLabel timerLabel;
     private ArrayList<JLabel> tiles;
     private int timeElapsed;
+    private boolean gameUpdates;
 
     public BoardLayout(Board board, Display display) throws IOException {
         
@@ -36,7 +37,7 @@ public class BoardLayout extends JFrame {
                     default:
                     direction = ' ';
                 }
-                if (direction != ' ') {
+                if (direction != ' ' && !gameUpdates) {
                     board.turnSnake(direction);
                 }
             }
@@ -46,6 +47,7 @@ public class BoardLayout extends JFrame {
         
         this.board = board;
         this.timeElapsed = 0;
+        this.gameUpdates = false;
         // Set up the JFrame
         setTitle("Brawl Snake");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,7 +77,6 @@ public class BoardLayout extends JFrame {
             JLabel label = new JLabel();
             label.setOpaque(false);
             label.setPreferredSize(new Dimension(50, 50));
-            //label.setBackground(Color.decode("#adc2ff"));
             tiles.add(label);
             panel.add(label);
         }
@@ -92,6 +93,9 @@ public class BoardLayout extends JFrame {
 
     public void updateGame() {
         // clear previous tile colors
+        if (gameUpdates) return;
+        gameUpdates = true;
+
         setEnabled(false);
 
         for (int i = 0; i < 15*17; i ++) {
@@ -125,6 +129,8 @@ public class BoardLayout extends JFrame {
        timerLabel.setText("Time: " + timeElapsed);
 
        setEnabled(true);
+
+       gameUpdates = false;
     }
     
 
