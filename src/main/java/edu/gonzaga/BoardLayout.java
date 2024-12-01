@@ -1,11 +1,9 @@
 package edu.gonzaga;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,9 +13,9 @@ public class BoardLayout extends JFrame {
     private JLabel timerLabel;
     private ArrayList<JLabel> tiles;
     private int timeElapsed;
-    private String difficulty;
 
-    public BoardLayout(Board board) throws IOException {
+    public BoardLayout(Board board, Display display) throws IOException {
+        
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -69,14 +67,15 @@ public class BoardLayout extends JFrame {
 
         // Create a JPanel with GridLayout
         JPanel panel = new JPanel(new GridLayout(15, 17));
+        panel.setBackground(display.getBackgroundColor());
 
         // Create text labels for the rest of the grid
         tiles = new ArrayList<>();
         for (int i = 0; i < 15 * 17; i++) {
             JLabel label = new JLabel();
-            label.setOpaque(true);
+            label.setOpaque(false);
             label.setPreferredSize(new Dimension(50, 50));
-            label.setBackground(Color.decode("#adc2ff"));
+            //label.setBackground(Color.decode("#adc2ff"));
             tiles.add(label);
             panel.add(label);
         }
@@ -131,6 +130,7 @@ public class BoardLayout extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Board board = new Board(5);
-        new BoardLayout(board);
+        Display display = new Display();
+        new BoardLayout(board, display);
     }
 }

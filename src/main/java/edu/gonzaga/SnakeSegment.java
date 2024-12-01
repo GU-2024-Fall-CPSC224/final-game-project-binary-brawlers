@@ -1,7 +1,5 @@
 package edu.gonzaga;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Map;
 
 public class SnakeSegment extends BoardElement {

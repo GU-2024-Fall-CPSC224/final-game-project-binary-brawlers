@@ -177,7 +177,10 @@ public class Display extends JPanel implements ActionListener {
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
                 // create graphical layout
-                BoardLayout layout = new BoardLayout(board);
+                BoardLayout layout = new BoardLayout(board, null);
+
+                //Color backgroundColor = getBackgroundColor();
+                layout.getContentPane().setBackground(getBackgroundColor());
 
                 //timer to control snake movement/game updates
                 new Timer(gameSpeed, e -> {
@@ -194,6 +197,19 @@ public class Display extends JPanel implements ActionListener {
                 e.printStackTrace();
             }
         });
+    }
+
+    Color getBackgroundColor() {
+        switch (obstacle) {
+            case 0: // Easy
+                return Color.decode("#0e6d96"); // Ocean
+            case 2: // Medium
+                return Color.decode("#0c7f2e"); // Grass
+            case 5: // Hard
+                return Color.decode("#670a1c"); // Lava idk?
+            default:
+                return Color.decode("#FFFFFF"); 
+        }
     }
 
     public void gameOverMenu() {

@@ -1,6 +1,5 @@
 package edu.gonzaga;
 
-import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public abstract class Food extends BoardElement {
