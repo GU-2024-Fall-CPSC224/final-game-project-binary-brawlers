@@ -145,23 +145,27 @@ public class Display extends JPanel implements ActionListener {
         System.out.println("Speed: " + gameSpeed + " | Obstacles: " + obstacle);
         // WILL HAVE TO IMPLEMENT A WAY TO CHANGE SPEED
         Board board = new Board(obstacle);
-        Scanner sc = new Scanner(System.in);
-        while (board.tick() == true) {
-            String dir = sc.nextLine();
-            if (dir == "") {
-                continue;
+        
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            try {
+                // create graphical layout
+                BoardLayout layout = new BoardLayout(board);
+
+                //timer to control snake movement/game updates
+                new Timer (200, e -> {
+                    board.turnSnake(board.getSnake().getFacing());
+                    if (!board.tick()) {
+                        gameOverMenu();
+                        System.out.println("Game Over!");
+                        ((Timer) e.getSource()).stop();
+                    } else {
+                        layout.updateGame();
+                    }
+                }).start();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (dir.equals("w")) {
-                board.turnSnake('u');
-            } else if (dir.equals("a")) {
-                board.turnSnake('l');
-            } else if (dir.equals("s")) {
-                board.turnSnake('d');
-            } else if (dir.equals("d")) {
-                board.turnSnake('r');
-            }
-        }
-        gameOverMenu();
+        });
     }
 
     public void gameOverMenu() {

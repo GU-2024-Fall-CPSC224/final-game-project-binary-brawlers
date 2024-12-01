@@ -30,26 +30,5 @@ public class MainGame {
         // added this section to display
         //wasd to turn
         //enter to tick game
-        Board board = new Board(2);
-        
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            try {
-                // create graphical layout
-                BoardLayout layout = new BoardLayout(board);
-
-                //timer to control snake movement/game updates
-                new Timer (200, e -> {
-                    board.turnSnake(board.getSnake().getFacing());
-                    if (!board.tick()) {
-                        System.out.println("Game Over!");
-                        ((Timer) e.getSource()).stop();
-                    } else {
-                        layout.updateGame();
-                    }
-                }).start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 }
