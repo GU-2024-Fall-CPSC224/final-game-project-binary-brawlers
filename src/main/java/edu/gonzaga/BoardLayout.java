@@ -94,22 +94,29 @@ public class BoardLayout extends JFrame {
         setEnabled(false);
 
         for (int i = 0; i < 15*17; i ++) {
-            tiles.get(i).setBackground(Color.decode(i % 2 == 0 ? "#d4a276" : "#bc8a5f"));
+            tiles.get(i).setIcon(null);
         }
 
         // draw the food
-        tiles.get(board.getFood().getY() * 17 + board.getFood().getX()).setBackground(Color.RED);
+        tiles.get(board.getFood().getY() * 17 + board.getFood().getX()).setIcon(new ImageIcon("assets/" + board.getFood().texturePath));
 
         // draw the obstacles
         for (Obstacle obstacle : board.getObstacles()) {
-            tiles.get(obstacle.getY() * 17 + obstacle.getX()).setBackground(Color.GRAY);
+            tiles.get(obstacle.getY() * 17 + obstacle.getX()).setIcon(new ImageIcon("assets/obstacle.png"));
         }
 
         // draw the snake
         for (SnakeSegment segment : board.getSnake().getSegments()) {
-            tiles.get(segment.getY() * 17 + segment.getX()).setBackground(Color.GREEN);
+            tiles.get(segment.getY() * 17 + segment.getX()).setIcon(new ImageIcon("assets/" + segment.getRotAsStr()+".png"));
         }
-        tiles.get(board.getSnake().getY() * 17 + board.getSnake().getX()).setBackground(Color.GREEN);
+
+        tiles.get(board.getSnake().getY() * 17 + board.getSnake().getX()).setIcon(new ImageIcon("assets/" + board.getSnake().getFacing()+".png"));
+        // try {
+        //     tiles.set(board.getSnake().getY() * 17 + board.getSnake().getX(), new JLabel(new ImageIcon(ImageIO.read(new File("./hr.png")))));
+        // } catch (IOException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
        // Update score and timer
        scoreLabel.setText("Score: " + board.getScore());

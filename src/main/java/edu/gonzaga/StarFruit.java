@@ -6,6 +6,7 @@ import java.awt.Image;
 public class StarFruit extends Food {
     public StarFruit(int x, int y) {
         super(x,y);
+        texturePath = "star.png";
     }
 
     @Override

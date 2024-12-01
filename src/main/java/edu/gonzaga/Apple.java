@@ -6,6 +6,7 @@ import java.awt.Image;
 public class Apple extends Food {
     public Apple (int x, int y) {
         super (x,y);
+        texturePath = "apple.png";
     }
 
     @Override
