@@ -21,14 +21,9 @@ public class MainGame {
         // intro window (add this stuff to display probably?)
         JFrame frame = new JFrame("Snake Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         Display display = new Display();
         display.startMenu(frame);
-
-
-        // added this section to display
-        //wasd to turn
-        //enter to tick game
     }
 }

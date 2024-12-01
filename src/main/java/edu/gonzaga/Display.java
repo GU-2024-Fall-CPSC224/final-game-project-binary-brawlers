@@ -12,7 +12,7 @@ public class Display extends JPanel implements ActionListener {
     private int GAME_HEIGHT = 1000;
 
     // defaults and intialize
-    private int gameSpeed = 100;
+    private int gameSpeed = 200;
     private int obstacle = 0;
     private boolean speedSelected = false;
     private boolean obstacleSelected = false;
@@ -87,19 +87,19 @@ public class Display extends JPanel implements ActionListener {
 
         JButton easy = new JButton("Easy");
         easy.addActionListener(event -> {
-            gameSpeed = 150;
+            gameSpeed = 300;
             speedSelected = true;
         });
 
         JButton normal = new JButton("Normal");
         normal.addActionListener(event -> {
-            gameSpeed = 100;
+            gameSpeed = 200;
             speedSelected = true;
         });
 
         JButton hard = new JButton("Hard");
         hard.addActionListener(event -> {
-            gameSpeed = 80;
+            gameSpeed = 100;
             speedSelected = true;
         });
 
@@ -152,7 +152,7 @@ public class Display extends JPanel implements ActionListener {
                 BoardLayout layout = new BoardLayout(board);
 
                 //timer to control snake movement/game updates
-                new Timer (200, e -> {
+                new Timer (gameSpeed, e -> {
                     board.turnSnake(board.getSnake().getFacing());
                     if (!board.tick()) {
                         gameOverMenu();
