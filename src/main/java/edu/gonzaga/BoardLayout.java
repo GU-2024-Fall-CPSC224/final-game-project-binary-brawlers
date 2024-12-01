@@ -15,6 +15,7 @@ public class BoardLayout extends JFrame {
     private JLabel timerLabel;
     private ArrayList<JLabel> tiles;
     private int timeElapsed;
+    private String difficulty;
 
     public BoardLayout(Board board) throws IOException {
         addKeyListener(new KeyAdapter() {
@@ -75,7 +76,7 @@ public class BoardLayout extends JFrame {
             JLabel label = new JLabel();
             label.setOpaque(true);
             label.setPreferredSize(new Dimension(50, 50));
-            label.setBackground(Color.decode(i % 2 == 0 ? "#d4a276" : "#bc8a5f"));
+            label.setBackground(Color.decode("#adc2ff"));
             tiles.add(label);
             panel.add(label);
         }
