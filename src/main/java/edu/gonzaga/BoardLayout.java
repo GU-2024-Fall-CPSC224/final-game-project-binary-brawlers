@@ -84,6 +84,7 @@ public class BoardLayout extends JFrame {
 
         // Make the JFrame visible
         setVisible(true);
+        setLocationRelativeTo(null);
 
         // Set up timer
         new Timer(1000, e -> updateGame()).start();

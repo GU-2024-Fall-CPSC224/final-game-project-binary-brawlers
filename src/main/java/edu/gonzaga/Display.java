@@ -3,19 +3,19 @@ package edu.gonzaga;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
-
 import javax.swing.*;
 
 public class Display extends JPanel implements ActionListener {
     private int GAME_WIDTH = 1000;
     private int GAME_HEIGHT = 1000;
 
-    // defaults and intialize
+    // defaults and initialize
     private int gameSpeed = 200;
     private int obstacle = 0;
     private boolean speedSelected = false;
     private boolean obstacleSelected = false;
+    private JButton selectedSpeedButton = null;
+    private JButton selectedObstacleButton = null;
 
     public Display() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -28,30 +28,30 @@ public class Display extends JPanel implements ActionListener {
     }
 
     public void startMenu(JFrame frame) {
-        frame.setSize(1000, 1000);
-        frame.setResizable(false);
-
         JPanel startWindow = new JPanel();
         startWindow.setLayout(new BoxLayout(startWindow, BoxLayout.Y_AXIS));
         startWindow.setBackground(Color.black);
 
-        // title
+        startWindow.add(Box.createRigidArea(new Dimension(0, 300)));
+
         JLabel title = new JLabel("SNAKE GAME");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setForeground(Color.white);
-        title.setFont(new Font("Arial", Font.BOLD, 24));
-        startWindow.add(Box.createRigidArea(new Dimension(0, 20)));
+        title.setFont(new Font("Arial", Font.BOLD, 50));
         startWindow.add(title);
 
-        // game settings
-        selection("Select Speed:", startWindow);
+        startWindow.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // settings
+        selection("SELECT SPEED:", startWindow);
         startWindow.add(speedButtons());
 
-        selection("Select Obstacles:", startWindow);
+        selection("SELECT OBSTACLE:", startWindow);
         startWindow.add(obstacleButtons());
 
-        // start game button
-        JButton startGame = new JButton("Start Game");
+        startWindow.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        JButton startGame = new JButton("START");
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.addActionListener(event -> {
             if (!speedSelected || !obstacleSelected) {
@@ -61,19 +61,22 @@ public class Display extends JPanel implements ActionListener {
                 startGame();
             }
         });
-        startWindow.add(Box.createRigidArea(new Dimension(0, 20)));
+        startGame.setFont(new Font("Arial", Font.BOLD, 30));
         startWindow.add(startGame);
 
+        startWindow.add(Box.createRigidArea(new Dimension(0, 300)));
+
         frame.add(startWindow);
-        frame.pack();
+        frame.setSize(GAME_WIDTH, GAME_HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
+    // sub headers
     private void selection(String text, JPanel panel) {
         JLabel subtitle = new JLabel(text);
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-        subtitle.setForeground(Color.white);
+        subtitle.setForeground(Color.green);
         subtitle.setFont(new Font("Arial", Font.PLAIN, 18));
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(subtitle);
@@ -85,23 +88,14 @@ public class Display extends JPanel implements ActionListener {
         buttons.setLayout(new FlowLayout());
         buttons.setBackground(Color.black);
 
-        JButton easy = new JButton("Easy");
-        easy.addActionListener(event -> {
-            gameSpeed = 300;
-            speedSelected = true;
-        });
+        JButton easy = createButton("EASY");
+        easy.addActionListener(event -> selectSpeed(easy, 300));
 
-        JButton normal = new JButton("Normal");
-        normal.addActionListener(event -> {
-            gameSpeed = 200;
-            speedSelected = true;
-        });
+        JButton normal = createButton("MEDIUM");
+        normal.addActionListener(event -> selectSpeed(normal, 200));
 
-        JButton hard = new JButton("Hard");
-        hard.addActionListener(event -> {
-            gameSpeed = 100;
-            speedSelected = true;
-        });
+        JButton hard = createButton("HARD");
+        hard.addActionListener(event -> selectSpeed(hard, 100));
 
         buttons.add(easy);
         buttons.add(normal);
@@ -110,29 +104,32 @@ public class Display extends JPanel implements ActionListener {
         return buttons;
     }
 
+    // selected speed
+    private void selectSpeed(JButton button, int speed) {
+        if (selectedSpeedButton != null) {
+            selectedSpeedButton.setBackground(Color.white);
+        }
+        selectedSpeedButton = button;
+        selectedSpeedButton.setBackground(Color.green);
+        gameSpeed = speed;
+        speedSelected = true;
+    }
+
+
     // obstacle settings
     private JPanel obstacleButtons() {
         JPanel buttons = new JPanel();
         buttons.setLayout(new FlowLayout());
         buttons.setBackground(Color.black);
 
-        JButton easy = new JButton("Easy");
-        easy.addActionListener(event -> {
-            obstacle = 0;
-            obstacleSelected = true;
-        });
+        JButton easy = createButton("EASY");
+        easy.addActionListener(event -> selectObstacle(easy, 0));
 
-        JButton medium = new JButton("Medium");
-        medium.addActionListener(event -> {
-            obstacle = 2;
-            obstacleSelected = true;
-        });
+        JButton medium = createButton("MEDIUM");
+        medium.addActionListener(event -> selectObstacle(medium, 2));
 
-        JButton hard = new JButton("Hard");
-        hard.addActionListener(event -> {
-            obstacle = 5;
-            obstacleSelected = true;
-        });
+        JButton hard = createButton("HARD");
+        hard.addActionListener(event -> selectObstacle(hard, 5));
 
         buttons.add(easy);
         buttons.add(medium);
@@ -141,9 +138,40 @@ public class Display extends JPanel implements ActionListener {
         return buttons;
     }
 
+    // selected obstacle
+    private void selectObstacle(JButton button, int obs) {
+        if (selectedObstacleButton != null) {
+            selectedObstacleButton.setBackground(Color.gray);
+        }
+        selectedObstacleButton = button;
+        selectedObstacleButton.setBackground(Color.green);
+        obstacle = obs;
+        obstacleSelected = true;
+    }
+    
+    // hovering animation
+    private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setBackground(Color.white);
+        button.setForeground(Color.black);
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setFont(new Font("Arial", Font.BOLD, 22));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setFont(new Font("Arial", Font.BOLD, 18));
+            }
+        });
+
+        return button;
+    }
+
     private void startGame() {
-        System.out.println("Speed: " + gameSpeed + " | Obstacles: " + obstacle);
-        // WILL HAVE TO IMPLEMENT A WAY TO CHANGE SPEED
         Board board = new Board(obstacle);
         
         javax.swing.SwingUtilities.invokeLater(() -> {
@@ -152,7 +180,7 @@ public class Display extends JPanel implements ActionListener {
                 BoardLayout layout = new BoardLayout(board);
 
                 //timer to control snake movement/game updates
-                new Timer (gameSpeed, e -> {
+                new Timer(gameSpeed, e -> {
                     board.turnSnake(board.getSnake().getFacing());
                     if (!board.tick()) {
                         gameOverMenu();
@@ -221,10 +249,4 @@ public class Display extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-    
-    // private void restartMenu(JFrame frame) {
-    //     frame.getContentPane().removeAll();
-    //     startMenu(frame);
-    //     frame.revalidate();
-    // }
 }

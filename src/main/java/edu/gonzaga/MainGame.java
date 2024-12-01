@@ -12,7 +12,6 @@
  */
 package edu.gonzaga;
 
-import javax.swing.Timer;
 import javax.swing.JFrame;
 
 /** Main program class for launching your team's program. */
@@ -21,7 +20,7 @@ public class MainGame {
         // intro window (add this stuff to display probably?)
         JFrame frame = new JFrame("Snake Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(true);
+        frame.setSize(1000, 1000);
 
         Display display = new Display();
         display.startMenu(frame);
