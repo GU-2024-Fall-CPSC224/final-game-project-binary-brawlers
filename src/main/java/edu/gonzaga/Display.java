@@ -92,10 +92,10 @@ public class Display extends JPanel implements ActionListener {
         easy.addActionListener(event -> selectSpeed(easy, 200));
 
         JButton normal = createButton("MEDIUM");
-        normal.addActionListener(event -> selectSpeed(normal, 100));
+        normal.addActionListener(event -> selectSpeed(normal, 150));
 
         JButton hard = createButton("HARD");
-        hard.addActionListener(event -> selectSpeed(hard, 50));
+        hard.addActionListener(event -> selectSpeed(hard, 75));
 
         buttons.add(easy);
         buttons.add(normal);

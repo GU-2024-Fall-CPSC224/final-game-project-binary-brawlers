@@ -21,15 +21,19 @@ public class BoardLayout extends JFrame {
             public void keyPressed(KeyEvent e) {
                 char direction;
                 switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
                     case KeyEvent.VK_W:
                     direction = 'u';
                     break;
+                    case KeyEvent.VK_LEFT:
                     case KeyEvent.VK_A:
                     direction = 'l';
                     break;
+                    case KeyEvent.VK_DOWN:
                     case KeyEvent.VK_S:
                     direction = 'd';
                     break;
+                    case KeyEvent.VK_RIGHT:
                     case KeyEvent.VK_D:
                     direction = 'r';
                     break;
