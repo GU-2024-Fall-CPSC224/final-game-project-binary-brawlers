@@ -17,14 +17,26 @@ public class Display extends JPanel implements ActionListener {
     private JButton selectedSpeedButton = null;
     private JButton selectedObstacleButton = null;
 
+
+    private ImageIcon backgroundImage;
+
+    private Music mp;
+
     public Display() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         setBackground(Color.green);
+        backgroundImage = new ImageIcon("assets/background.gif");
+        mp = new Music();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage.getImage(), 0, 0, GAME_WIDTH, GAME_HEIGHT, this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // add later
     }
 
     public void startMenu(JFrame frame) {
@@ -174,14 +186,19 @@ public class Display extends JPanel implements ActionListener {
     private void startGame() {
         Board board = new Board(obstacle);
         Display display = new Display();
+
+        try {
+            mp.loopSound("assets/music.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error playing background music: " + e.getMessage(), "Audio Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
         
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
                 // create graphical layout
                 BoardLayout layout = new BoardLayout(board, display);
-
-                //Color backgroundColor = getBackgroundColor();
-                layout.getContentPane().setBackground(getBackgroundColor());
 
                 //timer to control snake movement/game updates
                 new Timer(gameSpeed, e -> {
@@ -198,19 +215,6 @@ public class Display extends JPanel implements ActionListener {
                 e.printStackTrace();
             }
         });
-    }
-
-    Color getBackgroundColor() {
-        switch (obstacle) {
-            case 0: // Easy
-                return Color.decode("#0e6d96"); // Ocean
-            case 2: // Medium
-                return Color.decode("#0c7f2e"); // Grass
-            case 5: // Hard
-                return Color.decode("#670a1c"); // Lava idk?
-            default:
-                return Color.decode("#FFFFFF"); 
-        }
     }
 
     public void gameOverMenu() {
@@ -230,6 +234,8 @@ public class Display extends JPanel implements ActionListener {
         gameOverLabel.setFont(new Font("Arial", Font.BOLD, 48));
         gameOverPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         gameOverPanel.add(gameOverLabel);
+
+        mp.stopMusic();
     
         // try again button
         JButton tryAgainButton = new JButton("Try Again");

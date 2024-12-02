@@ -14,8 +14,11 @@ public class BoardLayout extends JFrame {
     private ArrayList<JLabel> tiles;
     private int timeElapsed;
 
+    private ImageIcon backgroundImage;
+
     public BoardLayout(Board board, Display display) throws IOException {
-        
+        backgroundImage = new ImageIcon("assets/background.gif");
+
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -70,16 +73,21 @@ public class BoardLayout extends JFrame {
         add(borderPanel, BorderLayout.NORTH);
 
         // Create a JPanel with GridLayout
-        JPanel panel = new JPanel(new GridLayout(15, 17));
-        panel.setBackground(display.getBackgroundColor());
-
+        JPanel panel = new JPanel(new GridLayout(15, 17)) {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Draw the background GIF for the game area
+                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        
         // Create text labels for the rest of the grid
         tiles = new ArrayList<>();
         for (int i = 0; i < 15 * 17; i++) {
             JLabel label = new JLabel();
             label.setOpaque(false);
             label.setPreferredSize(new Dimension(50, 50));
-            //label.setBackground(Color.decode("#adc2ff"));
             tiles.add(label);
             panel.add(label);
         }
@@ -116,12 +124,6 @@ public class BoardLayout extends JFrame {
         }
 
         tiles.get(board.getSnake().getY() * 17 + board.getSnake().getX()).setIcon(new ImageIcon("assets/" + board.getSnake().getFacing()+".png"));
-        // try {
-        //     tiles.set(board.getSnake().getY() * 17 + board.getSnake().getX(), new JLabel(new ImageIcon(ImageIO.read(new File("./hr.png")))));
-        // } catch (IOException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
 
        // Update score and timer
        scoreLabel.setText("Score: " + board.getScore());
