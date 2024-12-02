@@ -173,11 +173,12 @@ public class Display extends JPanel implements ActionListener {
 
     private void startGame() {
         Board board = new Board(obstacle);
+        Display display = new Display();
         
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
                 // create graphical layout
-                BoardLayout layout = new BoardLayout(board, null);
+                BoardLayout layout = new BoardLayout(board, display);
 
                 //Color backgroundColor = getBackgroundColor();
                 layout.getContentPane().setBackground(getBackgroundColor());
