@@ -11,6 +11,7 @@ public class BoardLayout extends JFrame {
     private Board board;
     private JLabel scoreLabel;
     private JLabel timerLabel;
+    private JLabel invincibleLabel;
     private ArrayList<JLabel> tiles;
     private int timeElapsed;
 
@@ -70,6 +71,10 @@ public class BoardLayout extends JFrame {
         timerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         borderPanel.add(timerLabel, BorderLayout.EAST);
         
+        invincibleLabel = new JLabel("Invincibility: " + board.getSnake().getInvincible(), JLabel.CENTER);
+        invincibleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        borderPanel.add(invincibleLabel, BorderLayout.CENTER);
+
         add(borderPanel, BorderLayout.NORTH);
 
         // Create a JPanel with GridLayout
@@ -129,7 +134,8 @@ public class BoardLayout extends JFrame {
        scoreLabel.setText("Score: " + board.getScore());
        timeElapsed++;
        timerLabel.setText("Time: " + timeElapsed);
-
+       int iTimer = board.getSnake().getInvincible();
+       invincibleLabel.setText(iTimer > 0 ? "Invincibility: " + iTimer : "");
        setEnabled(true);
     }
     

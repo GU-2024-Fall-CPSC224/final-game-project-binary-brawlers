@@ -7,7 +7,7 @@ public class Snake extends BoardElement {
     private ArrayList<SnakeSegment> segments;
     private char facing = 'r'; // u, d, l, r
     private int nextRotation = 'l' + 'r';
-    private int invincibleTimer = 0;
+    private int invincibleTimer = 10;
 
     public Snake() {
         super(3, 7);

@@ -12,7 +12,7 @@ public class StarFruit extends Food {
     @Override
     public void applyAffect(Snake snake) {
         // sets the snakes invicibility timer to 10 sec (we can change)
-        snake.setInvincible(10);
+        snake.setInvincible(snake.getInvincible() + 12);
     }
 
     @Override
