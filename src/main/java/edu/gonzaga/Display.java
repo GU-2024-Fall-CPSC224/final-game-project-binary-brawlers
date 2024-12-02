@@ -89,13 +89,13 @@ public class Display extends JPanel implements ActionListener {
         buttons.setBackground(Color.black);
 
         JButton easy = createButton("EASY");
-        easy.addActionListener(event -> selectSpeed(easy, 300));
+        easy.addActionListener(event -> selectSpeed(easy, 200));
 
         JButton normal = createButton("MEDIUM");
-        normal.addActionListener(event -> selectSpeed(normal, 200));
+        normal.addActionListener(event -> selectSpeed(normal, 100));
 
         JButton hard = createButton("HARD");
-        hard.addActionListener(event -> selectSpeed(hard, 100));
+        hard.addActionListener(event -> selectSpeed(hard, 50));
 
         buttons.add(easy);
         buttons.add(normal);
@@ -126,10 +126,10 @@ public class Display extends JPanel implements ActionListener {
         easy.addActionListener(event -> selectObstacle(easy, 0));
 
         JButton medium = createButton("MEDIUM");
-        medium.addActionListener(event -> selectObstacle(medium, 2));
+        medium.addActionListener(event -> selectObstacle(medium, 4));
 
         JButton hard = createButton("HARD");
-        hard.addActionListener(event -> selectObstacle(hard, 5));
+        hard.addActionListener(event -> selectObstacle(hard, 8));
 
         buttons.add(easy);
         buttons.add(medium);
