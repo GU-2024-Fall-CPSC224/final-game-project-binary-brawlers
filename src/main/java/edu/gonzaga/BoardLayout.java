@@ -17,7 +17,7 @@ public class BoardLayout extends JFrame {
     private ImageIcon backgroundImage;
 
     public BoardLayout(Board board, Display display) throws IOException {
-        backgroundImage = new ImageIcon("assets/background.gif");
+        backgroundImage = new ImageIcon("assets/IMG_5826.jpeg");
 
         addKeyListener(new KeyAdapter() {
             @Override
